@@ -5,14 +5,12 @@
 Hadoop provides a streaming API which supports any programming languages that can read from the standard input stdin and write to the standard output stdout.
 Hadoop streaming API uses the standard Linux streams as the interface between Hadoop and the program. 
 Thus, input data is passed via the stdin to a map function, which processes it line by line and writes to the stdout. 
-Input to the reduce function is stdin (which is guaranteed to be sorted by key by Hadoop) and the results are output to stdout.\
-(resource: https://www.princeton.edu/researchcomputing/computational-hardware/hadoop/mapred-tut/)
+Input to the reduce function is stdin (which is guaranteed to be sorted by key by Hadoop) and the results are output to stdout.
 
 ## Steps
 
 ## 1. Set all you need for your hadoop cluster
-Prerequisites: account at Metacentrum and access to Hadoop - https://www.metacentrum.cz/en/hadoop/\
-MetaCentrum Hadoop cluster documentation: https://wiki.metacentrum.cz/w/index.php?title=Hadoop_documentation&setlang=en
+Prerequisites: account at Metacentrum and access to Hadoop - https://www.metacentrum.cz/en/hadoop/
 
 Add this to .ssh/config
 ```
@@ -29,9 +27,8 @@ Try to log in to Hadoop Cluster
 $ ssh hador
 ```
 
-Metacentrum Hadoop Web Accessibility - https://wiki.metacentrum.cz/wiki/Hadoop_documentation#Web_accessibility   
-(Gain Kerberos ticket on your local machine and run web interface 
-)
+
+Gain Kerberos ticket on your local machine and run web interface
 ```sh
 $ scp <yourlogin>@hador.ics.muni.cz:/etc/krb5.conf .
 $ env KRB5_CONFIG=krb5.conf kinit <yourlogin>@META
@@ -46,7 +43,10 @@ Check https://hador-c1.ics.muni.cz:50470/
 $ wget http://central.maven.org/maven2/org/apache/hadoop/hadoop-streaming/2.6.0/hadoop-streaming-2.6.0.jar
 ```
 
-## 3. Implement mapper and reducer. Make sure the file has execution permission (chmod +x mapper.py and chmod +x reducer.py)
+## 3. Implement mapper and reducer. Make sure the files have execution permission.
+```sh
+$ chmod +x mapper.py reducer.py
+```
 
 ## 4. Download file which you want to process and put it into Hadoop’s HDFS.
 ```sh
@@ -76,9 +76,9 @@ $ sort -k 2 -g -r part-00000 > sorted.txt
 
 Hador MapReduce Job history - https://hador-c2.ics.muni.cz:19890/jobhistory
 
-## Documentation
-```sh
-yourlogin@hador:~$ hadoop version\
-Hadoop 2.6.0-cdh5.10.0\
-```
-http://hadoop.apache.org/docs/r2.6.0/hadoop-mapreduce-client/hadoop-mapreduce-client-core/HadoopStreaming.html
+## Links
+http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/  
+https://www.princeton.edu/researchcomputing/computational-hardware/hadoop/mapred-tut/  
+Hadoop Streaming documentation - http://hadoop.apache.org/docs/r2.6.0/hadoop-mapreduce-client/hadoop-mapreduce-client-core/HadoopStreaming.html  
+MetaCentrum Hadoop documentation: https://wiki.metacentrum.cz/w/index.php?title=Hadoop_documentation&setlang=en  
+MetaCentrum Hadoop Web Accessibility - https://wiki.metacentrum.cz/wiki/Hadoop_documentation#Web_accessibility   
